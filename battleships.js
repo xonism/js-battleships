@@ -5,6 +5,11 @@ const numberOfDoubleShips = 3;
 const numberOfTripleShips = 2;
 const numberOfQuadrupleShips = 1;
 
+const singleShipColor = '#fd5c63';
+const doubleShipColor = '#97233F';
+const tripleShipColor = '#DE3163';
+const quadrupleShipColor = '#A45A52';
+
 let ships = [];
 let busyCells = [];
 
@@ -23,6 +28,7 @@ while ( document.getElementsByTagName("TD")[i] ) {
             currentElement.style.backgroundColor = 'red';
         }
     } )
+
     i++;
 }
 
@@ -118,7 +124,7 @@ const launchSingleShip = () => {
 
         }
 
-        ship.style.backgroundColor = 'yellow';
+        ship.style.backgroundColor = singleShipColor;
     } else {
         launchSingleShip();
     }
@@ -225,8 +231,8 @@ const launchVerticalDoubleShip = () => {
 
         }
 
-        ship1.style.backgroundColor = 'lawngreen';
-        ship2.style.backgroundColor = 'lawngreen';
+        ship1.style.backgroundColor = doubleShipColor;
+        ship2.style.backgroundColor = doubleShipColor;
     } else {
         launchVerticalDoubleShip();
     }
@@ -333,8 +339,8 @@ const launchHorizontalDoubleShip = () => {
 
         }
 
-        ship1.style.backgroundColor = 'forestgreen';
-        ship2.style.backgroundColor = 'forestgreen';
+        ship1.style.backgroundColor = doubleShipColor;
+        ship2.style.backgroundColor = doubleShipColor;
     } else {
         launchHorizontalDoubleShip();
     }
@@ -454,9 +460,9 @@ const launchVerticalTripleShip = () => {
 
         }
 
-        ship1.style.backgroundColor = 'indigo';
-        ship2.style.backgroundColor = 'indigo';
-        ship3.style.backgroundColor = 'indigo';
+        ship1.style.backgroundColor = tripleShipColor;
+        ship2.style.backgroundColor = tripleShipColor;
+        ship3.style.backgroundColor = tripleShipColor;
     } else {
         launchVerticalTripleShip();
     }
@@ -576,9 +582,9 @@ const launchHorizontalTripleShip = () => {
     
         }
 
-        ship1.style.backgroundColor = 'mediumpurple';
-        ship2.style.backgroundColor = 'mediumpurple';
-        ship3.style.backgroundColor = 'mediumpurple';
+        ship1.style.backgroundColor = tripleShipColor;
+        ship2.style.backgroundColor = tripleShipColor;
+        ship3.style.backgroundColor = tripleShipColor;
     } else {
         launchHorizontalTripleShip();
     }
@@ -711,10 +717,10 @@ const launchVerticalQuadrupleShip = () => {
 
         }
 
-        ship1.style.backgroundColor = 'magenta';
-        ship2.style.backgroundColor = 'magenta';
-        ship3.style.backgroundColor = 'magenta';
-        ship4.style.backgroundColor = 'magenta';
+        ship1.style.backgroundColor = quadrupleShipColor;
+        ship2.style.backgroundColor = quadrupleShipColor;
+        ship3.style.backgroundColor = quadrupleShipColor;
+        ship4.style.backgroundColor = quadrupleShipColor;
     } else {
         launchVerticalQuadrupleShip();
     }
@@ -847,10 +853,10 @@ const launchHorizontalQuadrupleShip = () => {
 
         }
 
-        ship1.style.backgroundColor = 'pink';
-        ship2.style.backgroundColor = 'pink';
-        ship3.style.backgroundColor = 'pink';
-        ship4.style.backgroundColor = 'pink';
+        ship1.style.backgroundColor = quadrupleShipColor;
+        ship2.style.backgroundColor = quadrupleShipColor;
+        ship3.style.backgroundColor = quadrupleShipColor;
+        ship4.style.backgroundColor = quadrupleShipColor;
     } else {
         launchVerticalQuadrupleShip();
     }
