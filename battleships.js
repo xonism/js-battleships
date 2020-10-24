@@ -16,6 +16,13 @@ let busyCells = [];
 let hits = 0;
 let guesses = 0;
 
+const disableColors = () => {
+    singleShipColor = '';
+    doubleShipColor = '';
+    tripleShipColor = '';
+    quadrupleShipColor = '';
+};
+
 let i = 0;
 while ( document.getElementsByTagName("TD")[i] ) {
     let currentElement = document.getElementsByTagName("TD")[i];
