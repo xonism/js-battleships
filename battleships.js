@@ -5,10 +5,10 @@ const numberOfDoubleShips = 3;
 const numberOfTripleShips = 2;
 const numberOfQuadrupleShips = 1;
 
-const singleShipColor = '#fd5c63';
-const doubleShipColor = '#97233F';
-const tripleShipColor = '#DE3163';
-const quadrupleShipColor = '#A45A52';
+let singleShipColor = '#fd5c63';
+let doubleShipColor = '#97233F';
+let tripleShipColor = '#DE3163';
+let quadrupleShipColor = '#A45A52';
 
 let ships = [];
 let busyCells = [];
@@ -23,29 +23,36 @@ const disableColors = () => {
     quadrupleShipColor = '';
 };
 
-let i = 0;
-while ( document.getElementsByTagName("TD")[i] ) {
-    let currentElement = document.getElementsByTagName("TD")[i];
-    
-    currentElement.addEventListener( "click", function() {
-        guesses++;
-        document.getElementById('guesses').innerHTML = `Total Guesses: ${guesses}`;
-
-        if ( !ships.includes(currentElement) ) {
-            currentElement.style.backgroundColor = 'red';
-        }
-    } )
-
-    i++;
-}
-
-const randromFrom1ToGivenNumber = (number) => {
+const getRandomNumberFromOneToX = (number) => {
     return Math.floor( Math.random() * number ) + 1;
 }
 
+const updateHitsAndGuesses = () => {
+    document.getElementById('correct').innerHTML = `Correct Guesses: ${hits}`;
+    document.getElementById('guesses').innerHTML = `Total Guesses: ${guesses}`;
+};
+
+const addEventListenerToCells = () => {
+    let i = 0;
+    while ( document.getElementsByTagName("TD")[i] ) {
+        let currentElement = document.getElementsByTagName("TD")[i];
+        
+        currentElement.addEventListener( "click", function() {
+            guesses++;
+            updateHitsAndGuesses();
+    
+            if ( !ships.includes(currentElement) ) {
+                currentElement.style.backgroundColor = 'red';
+            }
+        } )
+    
+        i++;
+    }
+};
+
 const launchSingleShip = () => {
-    let rowCoord = randromFrom1ToGivenNumber(10);
-    let columnCoord = randromFrom1ToGivenNumber(10);
+    let rowCoord = getRandomNumberFromOneToX(10);
+    let columnCoord = getRandomNumberFromOneToX(10);
 
     let ship = board[ rowCoord ].cells[ columnCoord ];
 
@@ -138,8 +145,8 @@ const launchSingleShip = () => {
 };
 
 const launchVerticalDoubleShip = () => {
-    let rowCoord = randromFrom1ToGivenNumber(9);
-    let columnCoord = randromFrom1ToGivenNumber(10);
+    let rowCoord = getRandomNumberFromOneToX(9);
+    let columnCoord = getRandomNumberFromOneToX(10);
 
     let ship1 = board[ rowCoord ].cells[ columnCoord ];
     let ship2 = board[ rowCoord + 1 ].cells[ columnCoord ];
@@ -246,8 +253,8 @@ const launchVerticalDoubleShip = () => {
 };
 
 const launchHorizontalDoubleShip = () => {
-    let rowCoord = randromFrom1ToGivenNumber(10);
-    let columnCoord = randromFrom1ToGivenNumber(9);
+    let rowCoord = getRandomNumberFromOneToX(10);
+    let columnCoord = getRandomNumberFromOneToX(9);
 
     let ship1 = board[ rowCoord ].cells[ columnCoord ];
     let ship2 = board[ rowCoord ].cells[ columnCoord + 1 ];
@@ -354,8 +361,8 @@ const launchHorizontalDoubleShip = () => {
 };
 
 const launchVerticalTripleShip = () => {
-    let rowCoord = randromFrom1ToGivenNumber(8);
-    let columnCoord = randromFrom1ToGivenNumber(10);
+    let rowCoord = getRandomNumberFromOneToX(8);
+    let columnCoord = getRandomNumberFromOneToX(10);
 
     let ship1 = board[ rowCoord ].cells[ columnCoord ];
     let ship2 = board[ rowCoord + 1 ].cells[ columnCoord ];
@@ -476,8 +483,8 @@ const launchVerticalTripleShip = () => {
 };
 
 const launchHorizontalTripleShip = () => {
-    let rowCoord = randromFrom1ToGivenNumber(10);
-    let columnCoord = randromFrom1ToGivenNumber(8);
+    let rowCoord = getRandomNumberFromOneToX(10);
+    let columnCoord = getRandomNumberFromOneToX(8);
 
     let ship1 = board[ rowCoord ].cells[ columnCoord ];
     let ship2 = board[ rowCoord ].cells[ columnCoord + 1 ];
@@ -598,8 +605,8 @@ const launchHorizontalTripleShip = () => {
 };
 
 const launchVerticalQuadrupleShip = () => {
-    let rowCoord = randromFrom1ToGivenNumber(7);
-    let columnCoord = randromFrom1ToGivenNumber(10);
+    let rowCoord = getRandomNumberFromOneToX(7);
+    let columnCoord = getRandomNumberFromOneToX(10);
 
     let ship1 = board[ rowCoord ].cells[ columnCoord ];
     let ship2 = board[ rowCoord + 1 ].cells[ columnCoord ];
@@ -734,8 +741,8 @@ const launchVerticalQuadrupleShip = () => {
 };
 
 const launchHorizontalQuadrupleShip = () => {
-    let rowCoord = randromFrom1ToGivenNumber(10);
-    let columnCoord = randromFrom1ToGivenNumber(7);
+    let rowCoord = getRandomNumberFromOneToX(10);
+    let columnCoord = getRandomNumberFromOneToX(7);
 
     let ship1 = board[ rowCoord ].cells[ columnCoord ];
     let ship2 = board[ rowCoord ].cells[ columnCoord + 1 ];
@@ -869,35 +876,41 @@ const launchHorizontalQuadrupleShip = () => {
     }
 };
 
-for ( let i = 0; i < numberOfQuadrupleShips; i++ ) {
-    Math.round( Math.random() ) === 0 ? launchVerticalQuadrupleShip() : launchHorizontalQuadrupleShip();
-}
+const deployShips = () => {
+    for ( let i = 0; i < numberOfQuadrupleShips; i++ ) {
+        Math.round( Math.random() ) === 0 ? launchVerticalQuadrupleShip() : launchHorizontalQuadrupleShip();
+    }
+    
+    for ( let i = 0; i < numberOfTripleShips; i++ ) {
+        Math.round( Math.random() ) === 0 ? launchVerticalTripleShip() : launchHorizontalTripleShip();
+    }
+    
+    for ( let i = 0; i < numberOfDoubleShips; i++ ) {
+        Math.round( Math.random() ) === 0 ? launchVerticalDoubleShip() : launchHorizontalDoubleShip();
+    }
+    
+    for ( let i = 0; i < numberOfSingleShips; i++ ) {
+        launchSingleShip();
+    }
+};
 
-for ( let i = 0; i < numberOfTripleShips; i++ ) {
-    Math.round( Math.random() ) === 0 ? launchVerticalTripleShip() : launchHorizontalTripleShip();
-}
-
-for ( let i = 0; i < numberOfDoubleShips; i++ ) {
-    Math.round( Math.random() ) === 0 ? launchVerticalDoubleShip() : launchHorizontalDoubleShip();
-}
-
-for ( let i = 0; i < numberOfSingleShips; i++ ) {
-    launchSingleShip();
-}
-
-const hitMyShip = (array) => {
-    for ( let i = 0; i < array.length; i++ ) {
-        array[i].addEventListener( "click", function() {
-            array[i].style.backgroundColor = 'darkblue';
+const hitMyShip = () => {
+    for ( let i = 0; i < ships.length; i++ ) {
+        ships[i].addEventListener( "click", function() {
+            ships[i].style.backgroundColor = 'darkblue';
             alert('You\'ve hit my ship!');
             hits++;
-            document.getElementById('correct').innerHTML = `Correct Guesses: ${hits}`;
+            updateHitsAndGuesses();
 
             if ( hits === ships.length ) {
                 alert('You sunk all my ships!');
             }
-        } ) 
+        } );
     }
 };
 
-hitMyShip(ships);
+deployShips();
+
+addEventListenerToCells();
+
+hitMyShip();
