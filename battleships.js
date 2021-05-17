@@ -23,6 +23,8 @@ const disableColors = () => {
     quadrupleShipColor = '';
 };
 
+disableColors();
+
 const getRandomNumberFromOneToX = (number) => {
     return Math.floor( Math.random() * number ) + 1;
 }
